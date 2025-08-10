@@ -2,8 +2,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from app.api.v1.index import router
-from app.api.v1.citys import city
+from app.api.v1.main_router import main_router
 from app.core.config import setting
 
 app = FastAPI()
@@ -14,8 +13,7 @@ app.mount(
     name="static",
 )
 
-app.include_router(router)
-app.include_router(city)
+app.include_router(main_router)
 
 
 if __name__ == "__main__":

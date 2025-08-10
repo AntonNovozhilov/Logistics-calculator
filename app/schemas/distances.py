@@ -2,8 +2,8 @@ from pydantic import BaseModel, Field
 
 
 class DistanceBase(BaseModel):
-    sity_from: str = Field(...)
-    sity_to: str = Field(...)
+    city_from: str = Field(...)
+    city_to: str = Field(...)
     distance: int = Field(..., gt=0)
 
 
