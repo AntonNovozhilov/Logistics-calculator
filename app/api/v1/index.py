@@ -2,17 +2,20 @@ from fastapi import APIRouter, Form, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from app.core.config import setting
 
+from app.core.config import setting
 
 router = APIRouter()
 
 
 router.mount(
-    "/static", StaticFiles(directory=setting.base_dir / "static"), name="static"
+    "/static",
+    StaticFiles(directory=setting.BASE_DIR / "static"),
+    name="static",
 )
 
-templates = Jinja2Templates(directory=setting.base_dir / "templates")
+templates = Jinja2Templates(directory=setting.BASE_DIR / "templates")
+
 
 @router.get("/", response_class=HTMLResponse)
 async def get_form(request: Request):
