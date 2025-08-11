@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.db import get_async_session
 from app.models.citys import City
 from app.repositories.citys import city_repositories
-from app.schemas.citys import CityCread, CityDB, CityRead
+from app.schemas.citys import CityDB
 from app.validators.validators import validator
 
 city = APIRouter()

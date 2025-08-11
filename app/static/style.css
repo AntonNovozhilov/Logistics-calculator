@@ -20,7 +20,7 @@ body{
   padding-bottom:40px;
 }
 
-/* Header */
+
 .site-header{
   background:linear-gradient(90deg,var(--red) 0%, var(--red-dark) 100%);
   color:#fff;
@@ -35,7 +35,7 @@ body{
   font-weight:600;
 }
 
-/* layout */
+
 .container{
   width:100%;
   max-width:1100px;
@@ -54,7 +54,6 @@ body{
   border:1px solid rgba(200,0,0,0.04);
 }
 
-/* Titles */
 .section-title{
   margin:0 0 12px 0;
   color:var(--red-dark);
@@ -62,7 +61,7 @@ body{
   font-weight:600;
 }
 
-/* forms */
+
 .form-grid .row{
   display:flex;
   gap:12px;
@@ -90,7 +89,7 @@ body{
   font-size:12px;color:var(--muted);
 }
 
-/* checkboxes */
+
 .checks .checkbox{
   display:flex;
   gap:8px;
@@ -102,7 +101,7 @@ body{
   width:16px;height:16px;
 }
 
-/* buttons */
+
 .actions{
   margin-top:6px;
   display:flex;
@@ -125,7 +124,7 @@ body{
   box-shadow:0 6px 18px rgba(201,36,36,0.12);
 }
 
-/* results */
+
 .results .result-box{
   min-height:84px;
   padding:14px;
@@ -148,7 +147,7 @@ body{
   font-size:13px;
 }
 
-/* responsive */
+
 @media (min-width:760px){
   .container{grid-template-columns: 1fr 380px;}
   .card.results{grid-column: 1 / 3}

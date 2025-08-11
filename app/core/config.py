@@ -16,6 +16,11 @@ class Settings(BaseSettings):
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
 
+    AVERAGE_DAY_KM: int = 800
+    LEASING: int = 1_150_000
+    DAYMONTH: int = 30
+    WEIGTH_TRUCK: int = 20_000
+
     @property
     def date_base(self):
         """Путь к базе данных."""

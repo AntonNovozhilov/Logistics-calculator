@@ -5,7 +5,7 @@ from app.core.db import get_async_session
 from app.models.distances import Distance
 from app.repositories.citys import city_repositories
 from app.repositories.distances import distance_repositories
-from app.schemas.distances import DistanceCread, DistanceDB, DistanceRead
+from app.schemas.distances import DistanceDB
 from app.validators.validators import validator
 
 distance = APIRouter()

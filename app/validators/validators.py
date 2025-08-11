@@ -51,7 +51,7 @@ class Validators:
         if distance:
             raise HTTPException(
                 status_code=HTTPStatus.CONFLICT,
-                detail="Расстояние между городами с такими названиями " \
+                detail="Расстояние между городами с такими названиями "
                 "уже существует в базе данных.",
             )
 

@@ -17,17 +17,17 @@
     <section class="card">
       <h2 class="section-title">Калькулятор</h2>
 
-      <form id="mainCalc" class="form-grid" autocomplete="off" novalidate>
+      <form id="mainCalc" class="form-grid" autocomplete="off" method="post" action="/" novalidate>
         <div class="row two">
           <label class="field">
             <span>Город отправления</span>
-            <input type="text" id="fromCity" name="fromCity" placeholder="Только буквы" inputmode="text" required>
+            <input type="text" id="city_from" name="city_from" placeholder="Только буквы" inputmode="text" required>
             <small class="hint">Только буквы (например: Москва)</small>
           </label>
 
           <label class="field">
             <span>Город прибытия</span>
-            <input type="text" id="toCity" name="toCity" placeholder="Только буквы" inputmode="text" required>
+            <input type="text" id="city_to" name="city_to" placeholder="Только буквы" inputmode="text" required>
             <small class="hint">Только буквы (например: Владивосток)</small>
           </label>
         </div>
@@ -40,21 +40,20 @@
 
           <label class="field">
             <span>Кол-во доп. точек</span>
-            <input type="text" id="extraPoints" name="extraPoints" placeholder="0" inputmode="numeric" required>
+            <input type="text" id="extra_points" name="extra_points" placeholder="0" inputmode="numeric" required>
           </label>
         </div>
 
         <div class="row five checks">
-          <label class="checkbox"><input type="checkbox" id="fromRegion"> Отправление область</label>
-          <label class="checkbox"><input type="checkbox" id="toRegion"> Прибытие область</label>
-          <label class="checkbox"><input type="checkbox" id="cargoEasy"> Груз удобный</label>
-          <label class="checkbox"><input type="checkbox" id="cargoHard"> Груз не удобный</label>
-          <label class="checkbox"><input type="checkbox" id="dfo"> ДФО</label>
+          <label class="checkbox"><input type="checkbox" id="from_region" name="from_region"  value="true"> Отправление область</label>
+          <label class="checkbox"><input type="checkbox" id="to_region" name="to_region"  value="true"> Прибытие область</label>
+          <label class="checkbox"><input type="checkbox" id="cargo_easy" name="cargo_easy"  value="true"> Груз удобный</label>
+          <label class="checkbox"><input type="checkbox" id="cargo_hard" name="cargo_hard"  value="true"> Груз не удобный</label>
+          <label class="checkbox"><input type="checkbox" id="dfo" name="dfo"  value="true"> ДФО</label>
         </div>
 
         <div class="actions">
           <button type="submit" class="btn primary">Рассчитать</button>
-          <button type="button" id="resetMain" class="btn">Сбросить</button>
         </div>
       </form>
     </section>
@@ -62,20 +61,19 @@
     <section class="card">
       <h2 class="section-title">Не целевой расчёт</h2>
 
-      <form id="auxCalc" class="aux-form" autocomplete="off" novalidate>
+      <form id="auxCalc" class="aux-form" autocomplete="off" method="post" action="/notarget" novalidate>
         <label class="field small">
           <span>Расстояние (км)</span>
-          <input type="text" id="auxDistance" name="auxDistance" placeholder="Цифры" inputmode="numeric" required>
+          <input type="text" id="auxDistance" name="km" placeholder="Цифры" inputmode="numeric" required>
         </label>
 
         <label class="field small">
           <span>Вес груза (кг)</span>
-          <input type="text" id="auxWeight" name="auxWeight" placeholder="Цифры" inputmode="numeric" required>
+          <input type="text" id="auxWeight" name="weight" placeholder="Цифры" inputmode="numeric" required>
         </label>
 
         <div class="actions">
           <button type="submit" class="btn primary">Рассчитать</button>
-          <button type="button" id="resetAux" class="btn">Сбросить</button>
         </div>
       </form>
     </section>
@@ -83,7 +81,11 @@
     <section class="card results">
       <h2 class="section-title">Результат расчёта ставки</h2>
       <div id="resultBox" class="result-box">
-        <div class="empty">Здесь появится ставка после нажатия кнопки &laquo;Рассчитать&raquo;</div>
+        {% if result %}
+          Ставка: {{ result }} ₽
+        {% else %}
+          <div class="empty">Здесь появится ставка после нажатия кнопки «Рассчитать»</div>
+        {% endif %}
       </div>
     </section>
 
