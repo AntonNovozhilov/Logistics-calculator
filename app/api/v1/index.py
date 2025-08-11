@@ -4,6 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from app.core.config import setting
+from app.models.citys import City
 
 router = APIRouter()
 
@@ -27,6 +28,8 @@ async def get_form(request: Request):
 @router.post("/")
 async def get_data_from_form(
     request: Request,
+    city_from: str = Form(City),
+    city_to: str = Form(City),
     distance: int = Form(),
     weight: int = Form(),
     dfo: bool = Form(default=False),

@@ -5,6 +5,7 @@ from app.core.db import get_async_session
 from app.models.citys import City
 from app.repositories.citys import city_repositories
 from app.schemas.citys import CityCread, CityDB, CityRead
+from app.validators.validators import validator
 
 city = APIRouter()
 
@@ -24,6 +25,7 @@ async def get_city(
 ) -> CityDB:
     """Получить город БД."""
     result = await city_repositories.get_by_id(pk=pk, session=session)
+    await validator.exist_obj(obj=result)
     return result
 
 
@@ -32,6 +34,7 @@ async def create_city(
     name_city: str, session: AsyncSession = Depends(get_async_session)
 ) -> CityDB:
     """Создать город в БД."""
+    await validator.double_check_city(name=name_city, session=session)
     new_city = await city_repositories.creat(
         name_city=name_city, session=session
     )
@@ -44,5 +47,6 @@ async def delete_city(
     session: AsyncSession = Depends(get_async_session),
 ) -> CityDB:
     """Удалить город из БД."""
+    await validator.exist_obj(obj=city_obj)
     await city_repositories.delete(obj=city_obj, session=session)
     return city_obj

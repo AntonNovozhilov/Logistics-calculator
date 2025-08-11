@@ -6,6 +6,7 @@ from app.models.distances import Distance
 from app.repositories.citys import city_repositories
 from app.repositories.distances import distance_repositories
 from app.schemas.distances import DistanceCread, DistanceDB, DistanceRead
+from app.validators.validators import validator
 
 distance = APIRouter()
 
@@ -33,6 +34,7 @@ async def get_distance(
 ) -> DistanceDB:
     """Получить расстояние между городами из БД."""
     result = await distance_repositories.get_by_id(pk=pk, session=session)
+    await validator.exist_obj(obj=result)
     return result
 
 
@@ -54,6 +56,13 @@ async def create_distance(
     city_to = await city_repositories.get_by_name(
         name=name_city_to, session=session
     )
+    await validator.exist_obj(obj=city_from)
+    await validator.exist_obj(obj=city_to)
+    await validator.double_check_distance(
+        city_name_from=city_from.city_name,
+        city_name_to=city_to.city_name,
+        session=session,
+    )
     new_distance = await distance_repositories.creat(
         name_city_from=city_from.city_name,
         name_city_to=city_to.city_name,
@@ -73,5 +82,6 @@ async def delete_distance(
     session: AsyncSession = Depends(get_async_session),
 ) -> DistanceDB:
     """Удалить расстояние между городами из БД."""
+    await validator.exist_obj(obj=distance_obj)
     await distance_repositories.delete(obj=distance_obj, session=session)
     return distance_obj
