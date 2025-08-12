@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:13.10
+    env_file:
+      - ./app/.env
+    volumes:
+      - db_samcom:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  app:
+    depends_on:
+      - db
+    build: .
+    restart: always
+    ports:
+     - "8000:8000"
+    env_file:
+      - ./app/.env
+    command: sh -c "poetry run alembic upgrade head &&
+      poetry run python3 db_init.py &&
+      poetry run python -m app.main
+      "
+
+volumes:
+  db_samcom:
