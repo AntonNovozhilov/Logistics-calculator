@@ -110,4 +110,4 @@ class CalculatorNoTarget:
         if self.weight > setting.WEIGTH_TRUCK:
             over_tons = (self.weight - setting.WEIGTH_TRUCK) / 1000
             price *= 1 + 0.01 * over_tons
-        return price
+        return int(price)
